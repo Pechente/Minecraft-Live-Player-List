@@ -65,8 +65,8 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300">
     <link rel="stylesheet" href="style.css">
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-		<script src="favico-0.3.7.min.js"></script>
-		<script src="jquery.timeago.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/favico.js/0.3.7/favico.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.1/jquery.timeago.min.js"></script>
     <script src="main.js"></script>
   </head>
   <body>
