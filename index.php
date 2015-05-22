@@ -77,19 +77,12 @@ endif;
 			<p class="status"><? echo $settings->textOnline ?></p>
 
 			<ul class="online">
-        <?php if( ( $Players = $Query->GetPlayers( ) ) !== false ): //?>
-        <?php foreach( $Players as $Player ): ?>
-                    <li>
-										<? //The javascript-less site only has an online list using the simple API request - because lazy ?>
-        							<img src="https://minotar.net/avatar/<?php echo htmlspecialchars( $Player ); ?>/16" alt="<?php echo htmlspecialchars( $Player ); ?>"/>
-                      <p class="playername"><?php echo htmlspecialchars( $Player ); ?></p>
-        						</li>
-        <?php endforeach; ?>
-        <?php else: ?>
-        <?php endif; ?>
+				<p>Please enable Javascript :(</p>
 			</ul>
 			<p class="status"><? echo $settings->textOffline ?></p>
+
 			<ul class="offline">
+				<p>You’re stuck with this screen if you don’t</p>
 			</ul>
       <p class="connected"><span class="onlinePlayers"><? echo $OnlinePlayers ?></span>/<? echo $MaxPlayers . ' ' . $settings->textPlayersConnected ?></p>
     </main>
