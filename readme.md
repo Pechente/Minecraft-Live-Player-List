@@ -21,6 +21,10 @@ The current version works with Minecraft 1.8.X and is not likely to break with f
 5. Adjust the settings in _settings.json_.
 6. You’re done! You can now access index.php and check if everything’s working correctly.
 
+##Disclaimer:
+
+I developed this as a simple learning project and never planned to release this when I started with it. In its evolution, the code has undergone many changes and became dirty, redundant and probably has some unused variables. Don’t complain, submit a fix instead :)
+
 ##Licenses:
 
 based on [PHP-Minecraft-Query by xPaw](https://github.com/xPaw/PHP-Minecraft-Query), licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
