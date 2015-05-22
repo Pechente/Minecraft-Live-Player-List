@@ -77,12 +77,12 @@ endif;
 			<p class="status"><? echo $settings->textOnline ?></p>
 
 			<ul class="online">
-				<p>Please enable Javascript :(</p>
+				<li><p class="playername">Please enable Javascript :(</p></li>
 			</ul>
 			<p class="status"><? echo $settings->textOffline ?></p>
 
 			<ul class="offline">
-				<p>You’re stuck with this screen if you don’t</p>
+				<li><p class="playername">You’re stuck with this screen if you don’t. Yeah offline. That’s what you are!</p></li>
 			</ul>
       <p class="connected"><span class="onlinePlayers"><? echo $OnlinePlayers ?></span>/<? echo $MaxPlayers . ' ' . $settings->textPlayersConnected ?></p>
     </main>
