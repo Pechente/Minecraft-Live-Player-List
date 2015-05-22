@@ -4,19 +4,23 @@
 
 ##About:
 
-Minecraft Live Player List allows you host a website that displays currently active players as well as an offline list of recent players. The website interface automatically stays up to date and plays a sound as soon as a new player joins your server. The online player count is also mirrored as a badge in the favicon.
-
-The goal is to encourage a small player base to play together. Unlike most Minecraft server dependend web-sites, this one works with vanilla Minecraft and doesn’t require you to install any mods on your server as all the required data is gathered from protocols and files that are provided by the game.
+Minecraft Live Player List allows you host a website that displays currently active players as well as players that recently went offline. The web-interface always stays up to date and plays a sound as soon as a player joins your server. The online player count is mirrored as a badge in the favicon.
 
 __You can check out a [live version here](http://minecraft.rene-henrich.de/).__
+
+The goal is to encourage a small player base to play together. Unlike most Minecraft server dependend web-sites, this one works with vanilla Minecraft and doesn’t require you to install any mods on your server as all the required data is gathered from protocols and files that are provided by the game.
 
 The current version works with Minecraft 1.8.X and is not likely to break with future updates.
 
 ##Usage:
 
-The script needs to run on the same system that runs your Minecraft server. Be sure to have 'server-query' set to 'true' in your Minecraft server settings. After uploading all the files, you need to change the permission of player-cache.json to 777 and adjust the settings in player-query.php and main.js. The script needs to access the /playerdata folder inside your Minecraft world folder.
-
-After setup, I recommend to run /player-query.php?limit=20 in your browser before opening index.php since the script needs to cache the offline player names before it can operate properly. Caching the player names can take up to 2 seconds per player on the first launch, so adjust the request limit to fit your needs / patience.
+1. The script needs to run on the same system that runs your Minecraft server.
+2. Be sure to have _enable-query_ set to _true_ in your Minecraft _server.properties_.
+3. Upload all the files
+4. Change the permission of _player-cache.json_ to 777
+5. Adjust the settings in _settings.json_
+6. The script needs to access _usercache.json_ and the _/playerdata_ folder inside your Minecraft world folder, so make sure it’s readable
+7. You’re done! You can now access index.php and check if everything’s working correctly.
 
 ##Licenses:
 
