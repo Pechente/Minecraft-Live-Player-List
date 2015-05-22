@@ -17,9 +17,7 @@ var refreshInterval = 5;
 
 //load settings from file
 $.getJSON( "settings.json", function( data ) {
-  $.each( data, function( i, response ) {
-    refreshInterval = response.refreshInterval
-  });
+  refreshInterval = parseInt(data.refreshInterval)
 });
 
 $(document).ready(function(){
@@ -73,7 +71,5 @@ function loadPlayers() {
     timesRun += 1;
   });
 
-  setTimeout("loadPlayers()",5000);
+  setTimeout("loadPlayers()", refreshInterval*1000);
 }
-
-//to do: update time every min
