@@ -13,24 +13,14 @@ var favicon=new Favico({
     animation:'pop'
 });
 
-//timeago german language
-$.timeago.settings.strings = {
-  prefixAgo: "vor",
-  prefixFromNow: "in",
-  suffixAgo: "",
-  suffixFromNow: "",
-  seconds: "wenigen Sekunden",
-  minute: "etwa einer Minute",
-  minutes: "%d Minuten",
-  hour: "etwa einer Stunde",
-  hours: "%d Stunden",
-  day: "etwa einem Tag",
-  days: "%d Tagen",
-  month: "etwa einem Monat",
-  months: "%d Monaten",
-  year: "etwa einem Jahr",
-  years: "%d Jahren"
-};
+var refreshInterval = 5;
+
+//load settings from file
+$.getJSON( "settings.json", function( data ) {
+  $.each( data, function( i, response ) {
+    refreshInterval = response.refreshInterval
+  });
+});
 
 $(document).ready(function(){
   loadPlayers()
@@ -41,7 +31,7 @@ function loadPlayers() {
   onlineList = ''
   offlineList = ''
 
-  $.getJSON( "player-query.php?limit=5", function( data ) {
+  $.getJSON( "player-query.php", function( data ) {
 
     playerCount = 0
 

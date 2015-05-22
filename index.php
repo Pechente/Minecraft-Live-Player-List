@@ -1,50 +1,54 @@
-<?php
-	use xPaw\MinecraftQuery;
-	use xPaw\MinecraftQueryException;
+<?
+//load settings from json
+$settingsJson = file_get_contents('settings.json');
+$settings = json_decode($settingsJson);
 
-	// Edit this ->
-	define( 'MQ_SERVER_ADDR', 'localhost' );
-	define( 'MQ_SERVER_PORT', 25565 );
-	define( 'MQ_TIMEOUT', 1 );
-	// Edit this <-
+use xPaw\MinecraftQuery;
+use xPaw\MinecraftQueryException;
 
-	// Display everything in browser, because some people can't look in logs for errors
-	Error_Reporting( E_ALL | E_STRICT );
-	Ini_Set( 'display_errors', true );
+// Edit this ->
+define( 'MQ_SERVER_ADDR', 'localhost' );
+define( 'MQ_SERVER_PORT', 25565 );
+define( 'MQ_TIMEOUT', 1 );
+// Edit this <-
 
-	require __DIR__ . '/src/MinecraftQuery.php';
-	require __DIR__ . '/src/MinecraftQueryException.php';
+// Display everything in browser, because some people can't look in logs for errors
+Error_Reporting( E_ALL | E_STRICT );
+Ini_Set( 'display_errors', true );
 
-	$Timer = MicroTime( true );
+require __DIR__ . '/src/MinecraftQuery.php';
+require __DIR__ . '/src/MinecraftQueryException.php';
 
-	$Query = new MinecraftQuery( );
+$Timer = MicroTime( true );
 
-	try
-	{
-		$Query->Connect( MQ_SERVER_ADDR, MQ_SERVER_PORT, MQ_TIMEOUT );
-	}
-	catch( MinecraftQueryException $e )
-	{
-		$Exception = $e;
-	}
+$Query = new MinecraftQuery( );
 
-	$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
+try
+{
+	$Query->Connect( MQ_SERVER_ADDR, MQ_SERVER_PORT, MQ_TIMEOUT );
+}
+catch( MinecraftQueryException $e )
+{
+	$Exception = $e;
+}
 
-	if( ( $Info = $Query->GetInfo( ) ) !== false ):
-	foreach( $Info as $InfoKey => $InfoValue ):
-							if($InfoKey == "HostName") {
-								$HostName = $InfoValue;
-							}
+$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
 
-							else if($InfoKey == "Players") {
-								$OnlinePlayers = $InfoValue;
-							}
+if( ( $Info = $Query->GetInfo( ) ) !== false ):
+foreach( $Info as $InfoKey => $InfoValue ):
+						if($InfoKey == "HostName") {
+							$HostName = $InfoValue;
+						}
 
-							else if($InfoKey == "MaxPlayers") {
-								$MaxPlayers = $InfoValue;
-							}
-	endforeach;
-	endif;
+						else if($InfoKey == "Players") {
+							$OnlinePlayers = $InfoValue;
+						}
+
+						else if($InfoKey == "MaxPlayers") {
+							$MaxPlayers = $InfoValue;
+						}
+endforeach;
+endif;
 ?>
 
 <!DOCTYPE html>
@@ -53,12 +57,6 @@
 		<title><? echo $HostName; ?></title>
 		<meta charset="utf-8" />
 		<meta property="og:image" content="server-icon.png">
-
-		<? /*
-		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-		*/?>
 
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
@@ -72,11 +70,11 @@
   <body>
     <header>
       <img src="server-icon.png" alt="Dauerwurst Logo"/>
-      <h1>Dauerwurst</h1>
+      <h1><? echo $settings->serverName ?></h1>
       <h2><? echo $HostName; ?></h2>
     </header>
     <main>
-			<p class="status">online</p>
+			<p class="status"><? echo $settings->textOnline ?></p>
 
 			<ul class="online">
         <?php if( ( $Players = $Query->GetPlayers( ) ) !== false ): //?>
@@ -90,13 +88,13 @@
         <?php else: ?>
         <?php endif; ?>
 			</ul>
-			<p class="status">offline</p>
+			<p class="status"><? echo $settings->textOffline ?></p>
 			<ul class="offline">
 			</ul>
-      <p class="connected"><span class="onlinePlayers"><? echo $OnlinePlayers ?></span>/<? echo $MaxPlayers ?> Spielern verbunden.</p>
+      <p class="connected"><span class="onlinePlayers"><? echo $OnlinePlayers ?></span>/<? echo $MaxPlayers . ' ' . $settings->textPlayersConnected ?></p>
     </main>
     <footer>
-      <p>Minecraft font by PurePixel</p>
+      <p>Minecrafter font by PurePixel</p>
     </footer>
   </body>
 </html>

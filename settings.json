@@ -1,0 +1,11 @@
+{
+    "serverName" : "Server Name",
+    "serverPort" : "25565",
+    "pathToMinecraftRoot" : "/home/minecraft/survival/",
+    "worldName" : "Dauerwurst",
+    "refreshInterval" : "5",
+    "listLength" : "10",
+    "textPlayersConnected" : "Players connected",
+    "textOnline" : "online",
+    "textOffline" : "offline"
+}

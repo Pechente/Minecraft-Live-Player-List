@@ -1,6 +1,6 @@
 #Minecraft Live Player List
 
-![Minecraft Live Player List Web Interface Screenshot](http://i.imgur.com/Pfnbzq7.png)
+![Minecraft Live Player List Web Interface Screenshot](http://i.imgur.com/S0MIvgE.png)
 
 ##About:
 
@@ -16,10 +16,11 @@ The current version works with Minecraft 1.8.X and is not likely to break with f
 
 1. The script needs to run on the same system that runs your Minecraft server.
 2. Be sure to have _enable-query_ set to _true_ in your Minecraft _server.properties_.
-3. Upload all the files
-4. Change the permission of _player-cache.json_ to 777
-5. Adjust the settings in _settings.json_
-6. The script needs to access _usercache.json_ and the _/playerdata_ folder inside your Minecraft world folder, so make sure it’s readable
+3. The script will need to access _usercache.json_ and the _/playerdata_ folder inside your Minecraft world folder, so make sure it’s readable
+
+4. Upload all the files
+5. Change the permission of _player-cache.json_ to 777
+6. Adjust the settings in _settings.json_
 7. You’re done! You can now access index.php and check if everything’s working correctly.
 
 ##Licenses:

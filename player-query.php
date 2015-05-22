@@ -1,43 +1,40 @@
 <?
-  //!!!! API SHIT DON’T TOUCH !!!!
+//load settings from json
+$settingsJson = file_get_contents('settings.json');
+$settings = json_decode($settingsJson);
 
-	use xPaw\MinecraftQuery;
-	use xPaw\MinecraftQueryException;
+use xPaw\MinecraftQuery;
+use xPaw\MinecraftQueryException;
 
-	// Edit this ->
-	define( 'MQ_SERVER_ADDR', 'localhost' );
-	define( 'MQ_SERVER_PORT', 25565 );
-	define( 'MQ_TIMEOUT', 1 );
-	// Edit this <-
+// Edit this ->
+define( 'MQ_SERVER_ADDR', 'localhost' );
+define( 'MQ_SERVER_PORT', 25565 );
+define( 'MQ_TIMEOUT', 1 );
+// Edit this <-
 
-	// Display everything in browser, because some people can't look in logs for errors
-	Error_Reporting( E_ALL | E_STRICT );
-	Ini_Set( 'display_errors', true );
+// Display everything in browser, because some people can't look in logs for errors
+Error_Reporting( E_ALL | E_STRICT );
+Ini_Set( 'display_errors', true );
 
-	require __DIR__ . '/src/MinecraftQuery.php';
-	require __DIR__ . '/src/MinecraftQueryException.php';
+require __DIR__ . '/src/MinecraftQuery.php';
+require __DIR__ . '/src/MinecraftQueryException.php';
 
-	$Timer = MicroTime( true );
+$Timer = MicroTime( true );
 
-	$Query = new MinecraftQuery( );
+$Query = new MinecraftQuery( );
 
-	try
-	{
-		$Query->Connect( MQ_SERVER_ADDR, MQ_SERVER_PORT, MQ_TIMEOUT );
-	}
-	catch( MinecraftQueryException $e )
-	{
-		$Exception = $e;
-	}
+try
+{
+	$Query->Connect( MQ_SERVER_ADDR, MQ_SERVER_PORT, MQ_TIMEOUT );
+}
+catch( MinecraftQueryException $e )
+{
+	$Exception = $e;
+}
 
-	$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
-?>
-<?
+$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
 
 header('Content-type: application/json; charset=utf-8');
-
-//settings
-$pathToPlayerFiles = '/home/minecraft/survival/Dauerwurst/playerdata/';
 
 //get limit from URL
 if(isset($_GET['limit'])){
@@ -45,7 +42,7 @@ if(isset($_GET['limit'])){
 }
 
 else {
-  $limit = 20;
+  $limit = $settings->listLength;
 }
 
 //get online players for later
@@ -58,50 +55,28 @@ if( ( $Players = $Query->GetPlayers( ) ) !== false ){
 }
 
 //get offline Players from file names and sort them
-$files = glob($pathToPlayerFiles . '*.dat');
+$files = glob($settings->pathToMinecraftRoot . $settings->worldName . '/playerdata/' . '*.dat');
 usort($files, function($a, $b) {
     return filemtime($a) < filemtime($b);
 });
 
-//maybe limit $files to x results?
+//limiting array to most recent x users
 $files = array_slice($files, 0, $limit);
 
-//get local json file for uuid -> playername
-$playerCacheJson = file_get_contents("player-cache.json");
+//get server-provided json file for uuid -> playername
+$playerCacheJson = file_get_contents($settings->pathToMinecraftRoot . 'usercache.json');
 $playerCache = json_decode($playerCacheJson, true);
 
 foreach( $files as $file ){
 
-  //remove file extension and dashes to get clean uuid
+  //remove file extension to get clean uuid
   $uuid = basename($file, '.dat');
-  $uuid = str_replace('-', '', $uuid);
-
-  $playerIsCached = false;
 
   foreach ($playerCache as $playerData) {
-    //if uuid is in array, assign it
     if($uuid == $playerData['uuid']) {
-      $playerIsCached = true;
       $playerName = $playerData['name'];
     }
   }
-
-  if($playerIsCached == false) {
-    $json = file_get_contents('http://api.mcusername.net/pastuuid/' . $uuid);
-  	$playerObj = json_decode($json);
-
-    //assign player name
-    $playerName = $playerObj[count($playerObj)-1]->name;
-
-    //additionally, write player name to file for next time
-    $playerCache[] = array(
-      'name' => $playerName,
-      'uuid' => $uuid
-    );
-    $playerCacheJson = json_encode($playerCache);
-    file_put_contents('player-cache.json', $playerCacheJson);
-  }
-
   //check if player is online using array previously created
   $lastonline = date(DATE_ISO8601, filemtime($file));
 
@@ -112,6 +87,8 @@ foreach( $files as $file ){
       }
     }
   }
+
+	//finally write name and online time into array
   $playerList[] = array(
     'name'   => $playerName,
 		'lastonline' => $lastonline
@@ -120,7 +97,3 @@ foreach( $files as $file ){
 
 //output dat shit
 echo json_encode($playerList);
-
-//get online Players
-//substract from array, write into separate
-//return json, online { player:}, offline {player: lastonline:}
