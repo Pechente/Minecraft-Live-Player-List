@@ -8,7 +8,7 @@ Minecraft Live Player List allows you host a website that displays currently act
 
 __You can check out a [live version here](http://minecraft.rene-henrich.de/).__
 
-The goal is to encourage a small player base to play together. Unlike most Minecraft server dependend web-sites, this one works with vanilla Minecraft and doesn’t require you to install any mods on your server as all the required data is gathered from protocols and files that are provided by the game.
+The goal is to encourage a small player base to play together. Unlike most Minecraft server dependent web-sites, this one works with vanilla Minecraft and doesn’t require you to install any mods on your server as all the required data is gathered from protocols and files that are provided by the game.
 
 The current version works with Minecraft 1.8.X and is not likely to break with future updates.
 
@@ -19,12 +19,15 @@ The current version works with Minecraft 1.8.X and is not likely to break with f
 3. The script will need to access _usercache.json_ and the _/playerdata_ folder inside your Minecraft world folder, so make sure it’s readable.
 4. Upload all the files.
 5. Adjust the settings in _settings.json_.
-6. You’re done! You can now access index.php and check if everything’s working correctly.
+6. Replace _favicon.ico_ and _server-icon.png_ with graphics that suit your server. If you’re a fan of pixelated sausage icons, you can skip this step.
+7. You’re done! You can now access _index.php_ and check if everything’s working correctly.
 
 ##Disclaimer:
 
-I developed this as a simple learning project and never planned to release this when I started with it. In its evolution, the code has undergone many changes and became dirty, redundant and probably has some unused variables. Don’t complain, submit a fix instead :)
+I developed this as a simple learning project and never planned to release this when I started with it. In its evolution, the code has undergone many changes and became dirty, redundant and probably has some unused variables.
 
 ##Licenses:
 
 based on [PHP-Minecraft-Query by xPaw](https://github.com/xPaw/PHP-Minecraft-Query), licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
+
+Additionally, this project relies on [jQuery](https://jquery.com/), [favico.js](http://lab.ejci.net/favico.js/) and [timeago](http://timeago.yarp.com/).
