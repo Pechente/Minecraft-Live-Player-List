@@ -87,6 +87,9 @@ endif;
       <p class="connected"><span class="onlinePlayers"><? echo $OnlinePlayers ?></span>/<? echo $MaxPlayers . ' ' . $settings->textPlayersConnected ?></p>
     </main>
     <footer>
+			<form>
+				<input id="muteswitch" type="checkbox" name="sound" value="sound" checked> play sound when player joins</input>
+			</form>
       <p>Minecrafter font by PurePixel</p>
     </footer>
   </body>

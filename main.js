@@ -57,7 +57,7 @@ function loadPlayers() {
 
       favicon.badge(playerCount)
 
-      if (playerCount > oldPlayerCount && timesRun != 0) {
+      if (playerCount > oldPlayerCount && timesRun != 0 && $('#muteswitch').is(':checked')) {
         notificationSound.play()
       }
     }
