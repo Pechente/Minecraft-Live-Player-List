@@ -1,12 +1,17 @@
 @font-face {
-  font-family: 'Minecrafter';
-  src: url('fonts/minecrafter.reg-webfont.eot');
-  src: url('fonts/minecrafter.reg-webfont?#iefix') format('embedded-opentype'), url('fonts/minecrafter.reg-webfont.woff') format('woff'), url('fonts/minecrafter.reg-webfont.ttf') format('truetype'), url('fonts/minecrafter.reg-webfont.svg#icomoon') format('svg');
+  font-family: 'Minecraftia-Regular';
+  src: url('fonts/Minecraftia-Regular.eot');
+  src: url('fonts/Minecraftia-Regular.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Minecraftia-Regular.woff2') format('woff2'),
+       url('fonts/Minecraftia-Regular.woff') format('woff'),
+       url('fonts/Minecraftia-Regular.ttf') format('truetype'),
+       url('fonts/Minecraftia-Regular.svg#Minecraftia-Regular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 $dark: #191919;
+$brown: #ad9a82;
 
 body {
   background-color: #f4eee6;
@@ -29,7 +34,9 @@ header {
   }
 
   h1 {
-    font: 6em Minecrafter, sans-serif;
+    font: 5em Minecraftia-Regular, sans-serif;
+    line-height: 1em;
+    margin-top: 0.1em;
   }
 
   h2 {
@@ -41,10 +48,19 @@ header {
 
 main, footer {
   margin-left: 11em;
-  color: #ad9a82;
+  color: $brown;
 }
 
 footer {
+  a:link, a:visited {
+    color: $brown;
+    text-decoration: none;
+    font-weight: 400;
+    font-style: italic;
+  }
+  a:hover, a:focus {
+    color: $dark;
+  }
 }
 
 main {

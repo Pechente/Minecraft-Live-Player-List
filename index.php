@@ -91,7 +91,7 @@ endif;
 			<form>
 				<input id="muteswitch" type="checkbox" name="sound" value="sound" checked> <? echo $language['muteSwitch'] ?></input>
 			</form>
-      <p>Minecrafter font by PurePixel</p>
+      <p>Minecraftia font by <a href="http://andrewtyler.net">Andrew Tyler</a>, free for personal use only.</p>
     </footer>
   </body>
 </html>
