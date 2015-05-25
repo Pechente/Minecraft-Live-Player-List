@@ -18,7 +18,7 @@ The current version works with Minecraft 1.8.X and is not likely to break with f
 2. Be sure to have _enable-query_ set to _true_ in your Minecraft _server.properties_.
 3. The script will need to access _usercache.json_ and the _/playerdata_ folder inside your Minecraft world folder, so make sure it’s readable.
 4. Upload all the files.
-5. Adjust the settings in _settings.json_.
+5. Adjust the settings in _settings.php_.
 6. Replace _favicon.ico_ and _server-icon.png_ with graphics that suit your server. If you’re a fan of pixelated sausage icons, you can skip this step.
 7. You’re done! You can now access _index.php_ and check if everything’s working correctly.
 
