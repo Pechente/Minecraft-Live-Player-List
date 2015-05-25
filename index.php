@@ -1,16 +1,16 @@
 <?
-//load settings from json
-$settingsJson = file_get_contents('settings.json');
-$settings = json_decode($settingsJson);
+//load settings from php file
+include 'settings.php';
+
+//load language support
+include 'language_support/' . $settings['language'] . '.php';
 
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftQueryException;
 
-// Edit this ->
 define( 'MQ_SERVER_ADDR', 'localhost' );
-define( 'MQ_SERVER_PORT', 25565 );
+define( 'MQ_SERVER_PORT', $settings['serverPort']);
 define( 'MQ_TIMEOUT', 1 );
-// Edit this <-
 
 // Display everything in browser, because some people can't look in logs for errors
 Error_Reporting( E_ALL | E_STRICT );
@@ -65,30 +65,31 @@ endif;
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/favico.js/0.3.7/favico.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.1/jquery.timeago.min.js"></script>
+		<script src="language_support/jquery.timeago.<? echo $settings['language'] ?>.js"></script>
     <script src="main.js"></script>
   </head>
   <body>
     <header>
       <img src="server-icon.png" alt="Dauerwurst Logo"/>
-      <h1><? echo $settings->serverName ?></h1>
+      <h1><? echo $settings['serverName'] ?></h1>
       <h2><? echo $HostName; ?></h2>
     </header>
     <main>
-			<p class="status"><? echo $settings->textOnline ?></p>
+			<p class="status"><? echo $language['online'] ?></p>
 
 			<ul class="online">
 				<li><p class="playername">Please enable Javascript :(</p></li>
 			</ul>
-			<p class="status"><? echo $settings->textOffline ?></p>
+			<p class="status"><? echo $language['offline'] ?></p>
 
 			<ul class="offline">
 				<li><p class="playername">You’re stuck with this screen if you don’t. Yeah offline. That’s what you are!</p></li>
 			</ul>
-      <p class="connected"><span class="onlinePlayers"><? echo $OnlinePlayers ?></span>/<? echo $MaxPlayers . ' ' . $settings->textPlayersConnected ?></p>
+      <p class="connected"><span class="onlinePlayers"><? echo $OnlinePlayers ?></span>/<? echo $MaxPlayers . ' ' . $language['playersConnected'] ?></p>
     </main>
     <footer>
 			<form>
-				<input id="muteswitch" type="checkbox" name="sound" value="sound" checked> play sound when player joins</input>
+				<input id="muteswitch" type="checkbox" name="sound" value="sound" checked> <? echo $language['muteSwitch'] ?></input>
 			</form>
       <p>Minecrafter font by PurePixel</p>
     </footer>

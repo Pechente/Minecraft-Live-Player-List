@@ -1,3 +1,6 @@
+//set the refresh interval in seconds here. Between 1 - 15 seconds offers a good balance between performance and user experience
+var refreshInterval = 5;
+
 var notificationSound = new Audio('notification.mp3')
 var onlineList = ''
 var offlineList = ''
@@ -11,13 +14,6 @@ var favicon=new Favico({
     bgColor : '#3083b7',
     textColor : '#fff',
     animation:'pop'
-});
-
-var refreshInterval = 5;
-
-//load settings from file
-$.getJSON( "settings.json", function( data ) {
-  refreshInterval = parseInt(data.refreshInterval)
 });
 
 $(document).ready(function(){

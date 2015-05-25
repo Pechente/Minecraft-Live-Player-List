@@ -1,7 +1,6 @@
 <?
-//load settings from json
-$settingsJson = file_get_contents('settings.json');
-$settings = json_decode($settingsJson);
+//load settings from php file
+include 'settings.php';
 
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftQueryException;
@@ -42,7 +41,7 @@ if(isset($_GET['limit'])){
 }
 
 else {
-  $limit = $settings->listLength;
+  $limit = $settings['listLength'];
 }
 
 //get online players for later
@@ -55,7 +54,7 @@ if( ( $Players = $Query->GetPlayers( ) ) !== false ){
 }
 
 //get offline Players from file names and sort them
-$files = glob($settings->pathToMinecraftRoot . $settings->worldName . '/playerdata/' . '*.dat');
+$files = glob($settings['pathToMinecraftRoot'] . $settings['worldName'] . '/playerdata/' . '*.dat');
 usort($files, function($a, $b) {
     return filemtime($a) < filemtime($b);
 });
@@ -64,7 +63,7 @@ usort($files, function($a, $b) {
 $files = array_slice($files, 0, $limit);
 
 //get server-provided json file for uuid -> playername
-$playerCacheJson = file_get_contents($settings->pathToMinecraftRoot . 'usercache.json');
+$playerCacheJson = file_get_contents($settings['pathToMinecraftRoot'] . 'usercache.json');
 $playerCache = json_decode($playerCacheJson, true);
 
 foreach( $files as $file ){
